@@ -33,3 +33,6 @@ java -jar your_server_jar.jar
 Pull requests are welcome. For something urgent. Or wanting to post criticisms related comments. Please open an issue first to discuss on what you want to have.
 
 For contributions. Please make a pull request so that i can review and decide whether it should be added or not
+
+
+Most stuffs are broken and so clutter in mind right now. I will get it fixed with NETSU teams as soon as possible!
