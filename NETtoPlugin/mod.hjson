@@ -1,0 +1,8 @@
+name: "nettoplugin"
+displayName: "NETtoPLUGIN"
+author: "Anuke"
+main: "nettoplugin.mindustryCommand"
+description: "A plugin for NETtoTOWN"
+version: 1.0
+minGameVersion: 105
+
