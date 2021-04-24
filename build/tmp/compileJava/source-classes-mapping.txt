@@ -1,10 +1,4 @@
-nettoplugin/BotThread.java
- nettoplugin.BotThread
-nettoplugin/utilmethods.java
- nettoplugin.utilmethods
-nettoplugin/command/serverCommands.java
- nettoplugin.command.serverCommands
-nettoplugin/command/comCommands.java
- nettoplugin.command.comCommands
+nettoplugin/Command/test.java
+ nettoplugin.Command.test
 nettoplugin/mindustryCommand.java
  nettoplugin.mindustryCommand
