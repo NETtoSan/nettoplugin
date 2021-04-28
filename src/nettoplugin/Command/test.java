@@ -40,8 +40,8 @@ public class test extends ListenerAdapter {
         String roleID = dOb.getString("gameOver_role_id");
         if(args[0].startsWith("..") && !event.getChannel().getName().contains("bot")){
             EmbedBuilder eb = new EmbedBuilder();
-            eb.setTitle("This is not a valid channel! No matter if its a valid command or not");
-            eb.setDescription("Please use it in <#783149893622562838>.\n Set a good example!");
+            eb.setTitle("This is not a valid channel!");
+            eb.setDescription("Please use it in <#783149893622562838>.");
             eb.setColor(0x33FFEC);
 
             event.getChannel().sendTyping().queue();
