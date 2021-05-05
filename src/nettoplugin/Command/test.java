@@ -44,8 +44,8 @@ public class test extends ListenerAdapter {
             eb.setDescription("Please use it in <#783149893622562838>.");
             eb.setColor(0x33FFEC);
 
-            event.getChannel().sendTyping().queue();
-            event.getChannel().sendMessage(eb.build()).queue();
+            //event.getChannel().sendTyping().queue();
+            //Disable first event.getChannel().sendMessage(eb.build()).queue();
 
             return;
         }
@@ -113,6 +113,25 @@ public class test extends ListenerAdapter {
                 }
             }
             return;
+        }
+        if(args[0].equalsIgnoreCase("..list")){
+            if(state.isMenu()){
+                event.getChannel().sendTyping().queue();
+                event.getChannel().sendMessage(new EmbedBuilder().setTitle("The server is down!").setDescription("The server needs to be running before you can use this command")
+                .setColor(0xFF3333).build()).queue();
+                return;
+            }
+          if(args.length < 2){
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setTitle("Enter block name");
+            eb.setColor(0xFF3333);
+            event.getChannel().sendTyping().queue();
+            event.getChannel().sendMessage(eb.build()).queue();
+            return;
+          }
+          event.getChannel().sendTyping().queue();
+          event.getChannel().sendMessage("blame net this is not working").queue();
+          return;
         }
         if(args[0].equalsIgnoreCase("..say")){
             String[] msg = event.getMessage().getContentRaw().split(" ",2);
@@ -184,8 +203,8 @@ public class test extends ListenerAdapter {
             eb.setTitle("Unknown command!");
             eb.setDescription("Run **..help** to get a list of all commands!");
             eb.setColor(0xFF3333);
-            event.getChannel().sendTyping().queue();
-            event.getChannel().sendMessage(eb.build()).queue();
+            //event.getChannel().sendTyping().queue();
+            //event.getChannel().sendMessage(eb.build()).queue();
             return;
         }
     }

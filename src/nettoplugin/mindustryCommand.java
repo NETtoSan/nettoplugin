@@ -46,7 +46,7 @@ public class mindustryCommand extends Plugin{
     //Automated message. Using javacord first!
     public DiscordApi api = null;
     public mindustryCommand(){
-        System.out.println("It loaded!");
+        System.out.println("Loading NETtoPLUGIN assets");
         try{
             String pureJSON = Core.settings.getDataDirectory().child("mods/settings.json").readString();
             alldata = new JSONObject(new JSONTokener(pureJSON));
@@ -70,54 +70,31 @@ public class mindustryCommand extends Plugin{
         }
         try{
 
-            System.out.println("It loaded! and made through here!");
+            System.out.println("Loaded NETtoPLUGIN assets");
             jda = JDABuilder.createDefault(alldata.getString("token")).build();
             jda.getPresence().setStatus(OnlineStatus.ONLINE);
             jda.getPresence().setActivity(Activity.listening("NETto's pain"));
             jda.addEventListener(new test());
-
-            try{
-                api = new DiscordApiBuilder().setToken(alldata.getString("token")).login().join();
-            }
-            catch(Exception e){
-                System.out.println("[ERROR!] javacord: Cannot login!");
-            }
         }
         catch(Exception e){
             if(e.getMessage().contains("READY Packet")){
                 System.out.println("\n[ERR!] nettoplugin: invalid token.\n");
             }
         }
-
         if(data.has("live_chat_channel_id")){
-            TextChannel tc = this.getTextChannel(data.getString("live_chat_channel_id"));
-            if(tc != null){
-                Events.on(EventType.PlayerChatEvent.class, event->{
-                    tc.sendMessage("**" + event.player.name.replace("*","+")+ "**: " + event.message);
-                });
-                Events.on(ServerLoadEvent.class,event->{
-                    EmbedBuilder embed = new EmbedBuilder()
-                    .setTitle("Server loaded!")
-                    .setDescription("It will be hosted shortly");
+            Events.on(BuildSelectEvent.class , event ->{
+                if(!event.breaking && event.builder != null && event.builder.buildPlan() != null && event.builder.buildPlan().block == Blocks.thoriumReactor && event.builder.isPlayer()){
+                    //player is the unit controller
+                    Player player = event.builder.getPlayer();
+                    //send a message to everyone saying that this player has begun building a reactor
+                    jda.getTextChannelById("740998890312171560").sendTyping().queue();
+                    jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Alert!").setDescription(player.name + " has begun building a reactor at " + event.tile.x + ", " + event.tile.y).setColor(0x33FFEC).build()).queue();
+                }
+            });
+            Events.on(PlayerJoin.class,event->{
 
-                    TextChannel tsc = this.getTextChannel("787381605902581791");
-                    tsc.sendMessage(embed);
-                    jda.getPresence().setActivity(Activity.listening("Server rumbling itself to death"));
-                });
-            }
+
+            });
         }
-    }
-    public TextChannel getTextChannel(String id){
-        Optional<Channel> dc = ((Optional<Channel>)this.api.getChannelById(id));
-        if(!dc.isPresent()){
-            System.out.println("[ERR!] nettoplugin: channel not found");
-            return null;
-        }
-        Optional<TextChannel> dtc = dc.get().asTextChannel();
-        if(!dtc.isPresent()){
-            System.out.println("[ERR!] nettoplugin: textchannel not found!");
-            return null;
-        }
-        return dtc.get();
     }
 }
