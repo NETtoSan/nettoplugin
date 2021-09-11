@@ -51,9 +51,11 @@ public class test extends ListenerAdapter {
         }
         if(args[0].equalsIgnoreCase("..players")) {
             if(state.isMenu()){
-                event.getChannel().sendTyping().queue();
-                event.getChannel().sendMessage("**The server is down!** Server needs to be running before you can use this command\nTo view left players. NETto!_OS should have them all. Its been stored on the disk").queue();
-                return;
+              EmbedBuilder eb = new EmbedBuilder();
+              eb.setTitle("The server is down!").setDescription("The server needs to be running before you can use this command").setColor(0xFF3333);
+              event.getChannel().sendTyping().queue();
+              event.getChannel().sendMessage(eb.build()).queue();
+              return;
             }
             StringBuilder lijst = new StringBuilder();
             StringBuilder admins = new StringBuilder();
@@ -91,8 +93,11 @@ public class test extends ListenerAdapter {
                 crap = event.getMember().getRoles().get(identity);
                 if(crap != null) {
                     if(state.isMenu()){
-                        event.getChannel().sendTyping().queue();
-                        event.getChannel().sendMessage("**The server is down!** Server needs to be running before you can use this command").queue();
+                      EmbedBuilder eb = new EmbedBuilder();
+                      eb.setTitle("The server is down!").setDescription("The server needs to be running before you can use this command").setColor(0xFF3333);
+                      event.getChannel().sendTyping().queue();
+                      event.getChannel().sendMessage(eb.build()).queue();
+                      return;
                     }
                     else{
                         try{
@@ -116,10 +121,11 @@ public class test extends ListenerAdapter {
         }
         if(args[0].equalsIgnoreCase("..list")){
             if(state.isMenu()){
-                event.getChannel().sendTyping().queue();
-                event.getChannel().sendMessage(new EmbedBuilder().setTitle("The server is down!").setDescription("The server needs to be running before you can use this command")
-                .setColor(0xFF3333).build()).queue();
-                return;
+              EmbedBuilder eb = new EmbedBuilder();
+              eb.setTitle("The server is down!").setDescription("The server needs to be running before you can use this command").setColor(0xFF3333);
+              event.getChannel().sendTyping().queue();
+              event.getChannel().sendMessage(eb.build()).queue();
+              return;
             }
           if(args.length < 2){
             EmbedBuilder eb = new EmbedBuilder();
@@ -137,9 +143,11 @@ public class test extends ListenerAdapter {
         if(args[0].equalsIgnoreCase("..say")){
             String[] msg = event.getMessage().getContentRaw().split(" ",2);
             if(state.isMenu()){
-                event.getChannel().sendTyping().queue();
-                event.getChannel().sendMessage("**The server is down!** Server needs to be running before you can use this command").queue();
-                return;
+              EmbedBuilder eb = new EmbedBuilder();
+              eb.setTitle("The server is down!").setDescription("The server needs to be running before you can use this command").setColor(0xFF3333);
+              event.getChannel().sendTyping().queue();
+              event.getChannel().sendMessage(eb.build()).queue();
+              return;
             }
             if(args.length < 2){
               EmbedBuilder eb = new EmbedBuilder();
@@ -151,8 +159,10 @@ public class test extends ListenerAdapter {
               return;
             }
             Call.sendMessage("[cyan]"+event.getAuthor().getName()+"@Discord >[]"+ msg[1].trim());
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setTitle("Sent!").setDescription("You("+event.getAuthor().getName()+"): "+ msg[1].trim()).setColor(0x33FFEC);
             event.getChannel().sendTyping().queue();
-            event.getChannel().sendMessage("Sent!").queue();
+            event.getChannel().sendMessage(eb.build()).queue();
             return;
         }
         if(args[0].equalsIgnoreCase("..help")){
@@ -176,9 +186,11 @@ public class test extends ListenerAdapter {
         }
         if(args[0].equalsIgnoreCase("..info")){
             if(state.isMenu()){
-                event.getChannel().sendTyping().queue();
-                event.getChannel().sendMessage("**The server is down!** Server needs to be running before you can use this command").queue();
-                return;
+              EmbedBuilder eb = new EmbedBuilder();
+              eb.setTitle("The server is down!").setDescription("The server needs to be running before you can use this command").setColor(0xFF3333);
+              event.getChannel().sendTyping().queue();
+              event.getChannel().sendMessage(eb.build()).queue();
+              return;
             }
             try{
                 EmbedBuilder eb = new EmbedBuilder();
