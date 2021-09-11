@@ -36,6 +36,3 @@ For contributions. Please make a pull request so that i can review and decide wh
 
 
 Most stuffs are broken and so clutter in mind right now. I will get it fixed with NETSU teams as soon as possible!
-
-## Note
-If this cannot compile for **some reason**. Create an issue and i'll fix it ASAP.

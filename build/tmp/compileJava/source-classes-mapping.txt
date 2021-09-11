@@ -1,0 +1,8 @@
+nettoplugin/Command/test.java
+ nettoplugin.Command.test
+nettoplugin/mindustryCommand.java
+ nettoplugin.mindustryCommand
+nettoplugin/Command/serverControls.java
+ nettoplugin.Command.serverControls
+nettoplugin/Statics/researchConduct.java
+ nettoplugin.Statics.researchConduct
