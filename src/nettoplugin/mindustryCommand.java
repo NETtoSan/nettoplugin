@@ -88,7 +88,7 @@ public class mindustryCommand extends Plugin{
                     Player player = event.builder.getPlayer();
                     //send a message to everyone saying that this player has begun building a reactor
                     jda.getTextChannelById("740998890312171560").sendTyping().queue();
-                    jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Alert!").setDescription(player.name + " has begun building a reactor at " + event.tile.x + ", " + event.tile.y).setColor(0x33FFEC).build()).queue();
+                    jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Alert!").setDescription(player.name + " has begun building a reactor at " + event.tile.x + ", " + event.tile.y).setColor(0xFF3333).build()).queue();
                 }
             });
             Events.on(PlayerJoin.class,event->{
@@ -101,7 +101,7 @@ public class mindustryCommand extends Plugin{
             });
             Events.on(ServerLoadEvent.class,event -> {
               jda.getTextChannelById("740998890312171560").sendTyping().queue();
-              jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Server loaded!").setDescription("It will be hosted shortly").build()).queue();
+              jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Server loaded!").setDescription("It will be hosted shortly").setColor(0x33FFEC).build()).queue();
               jda.getPresence().setActivity(Activity.listening("Server rumbling itself to death"));
 
             });
