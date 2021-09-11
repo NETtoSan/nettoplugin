@@ -22,6 +22,7 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 
 import org.javacord.api.DiscordApi;
 import nettoplugin.Command.test;
+import nettoplugin.Command.serverControls;
 import org.javacord.api.DiscordApiBuilder;
 import org.javacord.api.entity.channel.Channel;
 import org.javacord.api.entity.channel.TextChannel;
@@ -75,6 +76,7 @@ public class mindustryCommand extends Plugin{
             jda.getPresence().setStatus(OnlineStatus.ONLINE);
             jda.getPresence().setActivity(Activity.listening("NETto's pain"));
             jda.addEventListener(new test());
+            jda.addEventListener(new serverControls());
         }
         catch(Exception e){
             if(e.getMessage().contains("READY Packet")){
