@@ -124,6 +124,7 @@ public class test extends ListenerAdapter {
           if(args.length < 2){
             EmbedBuilder eb = new EmbedBuilder();
             eb.setTitle("Enter block name");
+            eb.setDescription("Usage: ..list <block>");
             eb.setColor(0xFF3333);
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(eb.build()).queue();
@@ -139,6 +140,15 @@ public class test extends ListenerAdapter {
                 event.getChannel().sendTyping().queue();
                 event.getChannel().sendMessage("**The server is down!** Server needs to be running before you can use this command").queue();
                 return;
+            }
+            if(args.length < 2){
+              EmbedBuilder eb = new EmbedBuilder();
+              eb.setTitle("Enter message");
+              eb.setDescription("Usage: ..say <context>");
+              eb.setColor(0xFF3333);
+              event.getChannel().sendTyping().queue();
+              event.getChannel().sendMessage(eb.build()).queue();
+              return;
             }
             Call.sendMessage("[cyan]"+event.getAuthor().getName()+"@Discord >[]"+ msg[1].trim());
             event.getChannel().sendTyping().queue();
@@ -158,7 +168,11 @@ public class test extends ListenerAdapter {
             return;
         }
         if(args[0].equalsIgnoreCase("..host")){
-
+          EmbedBuilder eb = new EmbedBuilder();
+          eb.setTitle("This program is not working!");
+          event.getChannel().sendTyping().queue();
+          event.getChannel().sendMessage(eb.build()).queue();
+          return;
         }
         if(args[0].equalsIgnoreCase("..info")){
             if(state.isMenu()){

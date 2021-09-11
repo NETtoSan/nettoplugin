@@ -1,4 +1,0 @@
-nettoplugin/Command/test.java
- nettoplugin.Command.test
-nettoplugin/mindustryCommand.java
- nettoplugin.mindustryCommand

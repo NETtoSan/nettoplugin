@@ -100,28 +100,11 @@ public class mindustryCommand extends Plugin{
               jda.getTextChannelById("740998890312171560").sendMessage("**"+event.player.name.replace("*","+")+"**: "+event.message).queue();
             });
             Events.on(ServerLoadEvent.class,event -> {
-              EmbedBuilder embed = new EmbedBuilder()
-              .setTitle("Server loaded!")
-              .setDescription("It will be hosted shortly");
-
-                    TextChannel tsc = this.getTextChannel("787381605902581791");
-                    tsc.sendMessage(embed);
-                    jda.getPresence().setActivity(Activity.listening("Server rumbling itself to death"));
+              jda.getTextChannelById("740998890312171560").sendTyping().queue();
+              jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Server loaded!").setDescription("It will be hosted shortly").build()).queue();
+              jda.getPresence().setActivity(Activity.listening("Server rumbling itself to death"));
 
             });
         }
-    }
-    public TextChannel getTextChannel(String id){
-      Optional<Channel> dc = ((Optional<Channel>)this.api.getChannelById(id));
-      if(!dc.isPresent()){
-        System.out.println("[ERR!] nettoplugin: channel not found");
-        return null;
-      }
-      Optional<TextChannel> dtc = dc.get().asTextChannel();
-      if(!dtc.isPresent()){
-        System.out.println("[ERR!] nettoplugin: textchannel not found");
-        return null;
-      }
-      return dtc.get();
     }
 }
