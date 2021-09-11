@@ -65,7 +65,7 @@ public class test extends ListenerAdapter {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setTitle("Joined players");
             eb.setColor(0x33FFEC);
-            eb.setDescription("This is currently under testing. Significant stuffs coming in very soon!\nTo view left players. NETto!_OS should have them all. Its been stored on the disk");
+            eb.setDescription("Currnet players joined NETtoTOWN");
             eb.addField("Players total", lijst.toString(),false);
             eb.addField("Administrators",admins.toString(),false);
 
@@ -150,7 +150,7 @@ public class test extends ListenerAdapter {
             eb.setTitle("Help embed");
             eb.setDescription("This embed shows you all the commands where you can interact with NETtoTOWN");
             eb.setColor(0x33FFEC);
-            eb.addField("Public commands","Prefix: *..*\n1. players\n2. test\n3. say\n4. help",false);
+            eb.addField("Public commands","Prefix: *..*\n1. players\n2. test\n3. say\n4. help\n5. info",false);
             eb.addField("Management commands","Prefix: *..*\n1. gameover",false);
 
             event.getChannel().sendTyping().queue();
