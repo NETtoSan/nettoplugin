@@ -96,7 +96,9 @@ public class mindustryCommand extends Plugin{
             Events.on(PlayerJoin.class,event->{
               jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Join event").setDescription(event.player.name+" Joined the server").build()).queue();
             });
-
+            Events.on(PlayerLeave.class,event->{
+              jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Join event").setDescription(event.player.name+" left the server").build()).queue();
+            });
             Events.on(EventType.PlayerChatEvent.class, event -> {
               jda.getTextChannelById("740998890312171560").sendTyping().queue();
               jda.getTextChannelById("740998890312171560").sendMessage("**"+event.player.name.replace("*","+")+"**: "+event.message).queue();
