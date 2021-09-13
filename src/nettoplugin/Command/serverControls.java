@@ -1,6 +1,7 @@
 package nettoplugin.Command;
 import net.dv8tion.*;
 import mindustry.*;
+import mindustry.gen.Call;
 import mindustry.core.GameState.*;
 import mindustry.game.EventType.*;
 import nettoplugin.mindustryCommand;
@@ -43,6 +44,13 @@ public class serverControls extends ListenerAdapter{
             event.getChannel().sendMessage(eb.build()).queue();
             return;
           }
+          String[] msg = event.getMessage().getContentRaw().split(" ",2);
+          Call.announce(msg[1].trim());
+          EmbedBuilder eb = new EmbedBuilder();
+          eb.setTitle("Announced!").setDescription("You("+event.getAuthor().getName()+") announced: "+ msg[1].trim()).setColor(0x33FFEC);
+          event.getChannel().sendTyping().queue();
+          event.getChannel().sendMessage(eb.build()).queue();
+          return;
         }
         else{
           EmbedBuilder nopermembed = new EmbedBuilder();
