@@ -1,16 +1,24 @@
 package nettoplugin.Command;
 import net.dv8tion.*;
+import arc.Events;
 import mindustry.*;
+import mindustry.Vars.*;
 import mindustry.gen.Call;
+import mindustry.game.Team;
 import mindustry.core.GameState.*;
 import mindustry.game.EventType.*;
+import mindustry.net.Administration;
 import nettoplugin.mindustryCommand;
+
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+
 import org.json.JSONObject;
 import static mindustry.Vars.state;
+
+
 public class serverControls extends ListenerAdapter{
   private JSONObject dOb = mindustryCommand.alldata.getJSONObject("discord");;
   public Role crap;
@@ -103,7 +111,7 @@ public class serverControls extends ListenerAdapter{
                 else{
                     try{
                         event.getChannel().sendTyping().queue();
-                        event.getChannel().sendMessage("Executing!").queue();
+                        event.getChannel().sendMessage("Executed!").queue();
                         Events.fire(new GameOverEvent(Team.crux));
 
                     }
@@ -119,6 +127,13 @@ public class serverControls extends ListenerAdapter{
             }
         }
         return;
+    }
+    if(args[0].equalsIgnoreCase("..host")){
+      EmbedBuilder eb = new EmbedBuilder();
+      eb.setTitle("This program is not working!");
+      event.getChannel().sendTyping().queue();
+      event.getChannel().sendMessage(eb.build()).queue();
+      return;
     }
   }
 }

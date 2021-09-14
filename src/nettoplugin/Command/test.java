@@ -1,19 +1,23 @@
 package nettoplugin.Command;
 
 import arc.Core;
+import arc.files.Fi;
 import arc.Events;
 import arc.util.Nullable;
 import mindustry.*;
+import mindustry.mod.*;
+import mindustry.maps.*;
 import mindustry.Vars;
-import mindustry.game.EventType.*;
 import mindustry.game.Team;
 import mindustry.gen.Call;
 import mindustry.gen.Groups;
 import mindustry.gen.Player;
 import mindustry.maps.Map;
 import mindustry.maps.Maps.*;
-import mindustry.maps.*;
+import mindustry.mod.Plugin;
+import mindustry.maps.Map;
 import mindustry.net.Administration;
+
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.MessageBuilder;
@@ -21,11 +25,19 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+
+import nettoplugin.Autos.util;
 import nettoplugin.mindustryCommand;
+
+
 import mindustry.core.GameState.*;
 import mindustry.Vars.*;
 import org.json.JSONObject;
 
+import javax.imageio.ImageIO;
+import java.io.*;
+import java.io.File;
+import java.awt.image.BufferedImage;
 import java.lang.reflect.Array;
 
 import static mindustry.Vars.state;
@@ -34,9 +46,9 @@ public class test extends ListenerAdapter {
     private @Nullable Map nextMapOverride;
     private JSONObject dOb = mindustryCommand.alldata.getJSONObject("discord");;
     public Role crap;
-    public Maps maps = new Maps();
     public void onGuildMessageReceived(GuildMessageReceivedEvent event){
         String[] args = event.getMessage().getContentRaw().split(" ");
+        String[] msg = event.getMessage().getContentRaw().split(" ",2);
         String roleID = dOb.getString("gameOver_role_id");
         if(args[0].startsWith("..") && !event.getChannel().getName().contains("bot")){
             EmbedBuilder eb = new EmbedBuilder();
@@ -81,7 +93,6 @@ public class test extends ListenerAdapter {
             return;
         }
         if(args[0].equalsIgnoreCase("..say")){
-            String[] msg = event.getMessage().getContentRaw().split(" ",2);
             if(state.isMenu()){
               EmbedBuilder eb = new EmbedBuilder();
               eb.setTitle("The server is down!").setDescription("The server needs to be running before you can use this command").setColor(0xFF3333);
@@ -116,13 +127,6 @@ public class test extends ListenerAdapter {
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(eb.build()).queue();
             return;
-        }
-        if(args[0].equalsIgnoreCase("..host")){
-          EmbedBuilder eb = new EmbedBuilder();
-          eb.setTitle("This program is not working!");
-          event.getChannel().sendTyping().queue();
-          event.getChannel().sendMessage(eb.build()).queue();
-          return;
         }
         if(args[0].equalsIgnoreCase("..info")){
             if(state.isMenu()){
@@ -162,6 +166,41 @@ public class test extends ListenerAdapter {
             eb.addField("Total maps: "+i,nmap.toString(),false);
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(eb.build()).queue();
+        }
+        if(args[0].equalsIgnoreCase("..map")){
+          if(args.length < 2){
+            EmbedBuilder eb = new EmbedBuilder().setTitle("Map name required!").setDescription("..map <map name>").setColor(0xFF3333);
+            event.getChannel().sendTyping().queue();
+            event.getChannel().sendMessage(eb.build()).queue();
+            return;
+          }
+          Map map = util.findMap(msg[1].trim());
+          if(map == null){
+            EmbedBuilder eb = new EmbedBuilder().setTitle("Invalid map!").setDescription("find map by executing `..maps`").setColor(0xFF3333);
+            event.getChannel().sendTyping().queue();
+            event.getChannel().sendMessage(eb.build()).queue();
+            return;
+          }
+
+          Fi mapFile = map.file;
+
+          EmbedBuilder eb = new EmbedBuilder().setTitle(map.name()).setDescription(map.description()).setAuthor(map.author()).setColor(0x33FFEC);
+
+          BufferedImage mapImage;
+          File file = new File("test.jpg");
+          try{
+            mapImage = ImageIO.read(map.previewFile().file());
+            if(mapImage != null){
+              file = new File("test.jpg");
+              ImageIO.write(mapImage,"jpg",file);
+              eb.setImage("attachment://"+file);
+            }
+          }
+          catch(Exception e){
+
+          }
+          event.getChannel().sendTyping().queue();
+          event.getChannel().sendMessage(eb.build()).queue();
         }
         else if(args[0].startsWith("..")){
             if(event.getAuthor().isBot()) return;
