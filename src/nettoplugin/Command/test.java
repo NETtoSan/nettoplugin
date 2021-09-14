@@ -80,66 +80,6 @@ public class test extends ListenerAdapter {
             event.getChannel().sendMessage(event.getMember().getRoles().toString()).queue();
             return;
         }
-        if(args[0].equalsIgnoreCase("..gameover")){
-            Role validity = event.getGuild().getRoleById(roleID);
-            if(validity != null){
-                int identity = event.getMember().getRoles().indexOf(validity);
-                System.out.println(identity);
-                if(identity <= 0){
-                    event.getChannel().sendTyping().queue();
-                    event.getChannel().sendMessage("**No permission!**. Only NETtoTOWN managers can execute this command.").queue();
-                    return;
-                }
-                crap = event.getMember().getRoles().get(identity);
-                if(crap != null) {
-                    if(state.isMenu()){
-                      EmbedBuilder eb = new EmbedBuilder();
-                      eb.setTitle("The server is down!").setDescription("The server needs to be running before you can use this command").setColor(0xFF3333);
-                      event.getChannel().sendTyping().queue();
-                      event.getChannel().sendMessage(eb.build()).queue();
-                      return;
-                    }
-                    else{
-                        try{
-                            event.getChannel().sendTyping().queue();
-                            event.getChannel().sendMessage("Executing!").queue();
-                            Events.fire(new GameOverEvent(Team.crux));
-
-                        }
-                        catch(Exception e){
-                            event.getChannel().sendTyping().queue();
-                            event.getChannel().sendMessage("There was an error INSIDE a gameover event!").queue();
-                        }
-                    }
-                }
-                else{
-                    event.getChannel().sendTyping().queue();
-                    event.getChannel().sendMessage("**No permission!**. Only NETtoTOWN managers can execute this command.").queue();
-                }
-            }
-            return;
-        }
-        if(args[0].equalsIgnoreCase("..list")){
-            if(state.isMenu()){
-              EmbedBuilder eb = new EmbedBuilder();
-              eb.setTitle("The server is down!").setDescription("The server needs to be running before you can use this command").setColor(0xFF3333);
-              event.getChannel().sendTyping().queue();
-              event.getChannel().sendMessage(eb.build()).queue();
-              return;
-            }
-          if(args.length < 2){
-            EmbedBuilder eb = new EmbedBuilder();
-            eb.setTitle("Enter block name");
-            eb.setDescription("Usage: ..list <block>");
-            eb.setColor(0xFF3333);
-            event.getChannel().sendTyping().queue();
-            event.getChannel().sendMessage(eb.build()).queue();
-            return;
-          }
-          event.getChannel().sendTyping().queue();
-          event.getChannel().sendMessage("blame net this is not working").queue();
-          return;
-        }
         if(args[0].equalsIgnoreCase("..say")){
             String[] msg = event.getMessage().getContentRaw().split(" ",2);
             if(state.isMenu()){
