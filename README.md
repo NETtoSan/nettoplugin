@@ -6,7 +6,7 @@ Inspired (and technically cloned) by J-VdS discordplugin. You can check out his 
 
 ## Building a plugin
 
-Make sure you have the latest JDK available (15 i guess) to compile the plugin or develop without issues.
+This plugin only works on jdk15. Since gradle 6.6 will error when building with jdk17
 
 Open this downloaded repository in command prompt or terminal. and run the following command
 ```bash
