@@ -20,9 +20,9 @@ import mindustry.core.GameState.*;
 import mindustry.game.EventType.*;
 import mindustry.net.Administration;
 import nettoplugin.mindustryCommand;
+import nettoplugin.Autos.util;
 
-
-//From Anuken
+//Copied From Anuken
 import mindustry.core.GameState.*;
 import mindustry.core.*;
 import mindustry.game.EventType.*;
@@ -54,10 +54,10 @@ public class serverControls extends ListenerAdapter{
   private Task lastTask;
   private Gamemode lastMode;
   private JSONObject dOb = mindustryCommand.alldata.getJSONObject("discord");;
+  private String roleID = dOb.getString("gameOver_role_id");
   public Role crap;
   public void onGuildMessageReceived(GuildMessageReceivedEvent event){
     String[] args = event.getMessage().getContentRaw().split(" ");
-    String roleID = dOb.getString("gameOver_role_id");
     if(args[0].equalsIgnoreCase("..announce")){
       if(state.isMenu()){
         EmbedBuilder eb = new EmbedBuilder();
@@ -254,6 +254,16 @@ public class serverControls extends ListenerAdapter{
         }
       }
       return;
+    }
+    if(args[0].equalsIgnoreCase("..rename")){
+      if(state.isMenu()){
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("The server is down!").setDescription("The server needs to be running before you can use this command").setColor(0xFF3333);
+        event.getChannel().sendTyping().queue();
+        event.getChannel().sendMessage(eb.build()).queue();
+        return;
+      }
+      util.checkUser(event);
     }
   }
 }
