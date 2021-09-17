@@ -38,7 +38,6 @@ import mindustry.net.Packets.*;
 import mindustry.net.*;
 import mindustry.type.*;
 
-
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
