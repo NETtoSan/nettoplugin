@@ -97,43 +97,27 @@ public class serverControls extends ListenerAdapter{
       return;
     }
     if(args[0].equalsIgnoreCase("..gameover")){
-        Role validity = event.getGuild().getRoleById(roleID);
-        if(validity != null){
-            int identity = event.getMember().getRoles().indexOf(validity);
-            System.out.println(identity);
-            if(identity <= 0){
-                event.getChannel().sendTyping().queue();
-                event.getChannel().sendMessage("**No permission!**. Only NETtoTOWN managers can execute this command.").queue();
-                return;
-            }
-            crap = event.getMember().getRoles().get(identity);
-            if(crap != null) {
-                if(state.isMenu()){
-                  EmbedBuilder eb = new EmbedBuilder();
-                  eb.setTitle("The server is down!").setDescription("The server needs to be running before you can use this command").setColor(0xFF3333);
-                  event.getChannel().sendTyping().queue();
-                  event.getChannel().sendMessage(eb.build()).queue();
-                  return;
-                }
-                else{
-                    try{
-                        event.getChannel().sendTyping().queue();
-                        event.getChannel().sendMessage("Executed!").queue();
-                        Events.fire(new GameOverEvent(Team.crux));
+      //Test function in Autos
+      Role permission = util.checkUser(event);
+      if(permission != null){
+        try{
+          event.getChannel().sendTyping().queue();
+          event.getChannel().sendMessage("Executed!").queue();
+          Events.fire(new GameOverEvent(Team.crux));
 
-                    }
-                    catch(Exception e){
-                        event.getChannel().sendTyping().queue();
-                        event.getChannel().sendMessage("There was an error INSIDE a gameover event!").queue();
-                    }
-                }
-            }
-            else{
-                event.getChannel().sendTyping().queue();
-                event.getChannel().sendMessage("**No permission!**. Only NETtoTOWN managers can execute this command.").queue();
-            }
         }
-        return;
+        catch(Exception e){
+          event.getChannel().sendTyping().queue();
+          event.getChannel().sendMessage("There was an error INSIDE a gameover event!").queue();
+        }
+      }
+      else{
+        EmbedBuilder nopermembed = new EmbedBuilder();
+        nopermembed.setTitle("No permission!").setDescription("ONly NETtoTOWN managers can excute this command!").setColor(0xFF3333);
+        event.getChannel().sendTyping().queue();
+        event.getChannel().sendMessage(nopermembed.build()).queue();
+      }
+      return;
     }
     if(args[0].equalsIgnoreCase("..stop")){
       if(state.isMenu()){
