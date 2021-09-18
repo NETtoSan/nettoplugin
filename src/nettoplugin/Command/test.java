@@ -186,18 +186,13 @@ public class test extends ListenerAdapter {
 
           EmbedBuilder eb = new EmbedBuilder().setTitle(map.name()).setDescription(map.description()).setAuthor(map.author()).setColor(0x33FFEC);
 
-          BufferedImage mapImage;
-          File file = new File("test.jpg");
           try{
-            mapImage = ImageIO.read(map.previewFile().file());
-            if(mapImage != null){
-              file = new File("test.jpg");
-              ImageIO.write(mapImage,"jpg",file);
-              eb.setImage("attachment://"+file);
-            }
+            map.image
           }
           catch(Exception e){
-
+            event.getChannel().sendTyping().queue();
+            event.getChannel().sendMessage(new EmbedBuilder().setTitle("Error parsing map").setDescription(""+e).setColor(0xFF3333).build()).queue();
+            return;
           }
           event.getChannel().sendTyping().queue();
           event.getChannel().sendMessage(eb.build()).queue();
