@@ -2,26 +2,15 @@ package nettoplugin.Command;
 
 import arc.Core;
 import arc.files.Fi;
-import arc.Events;
 import arc.util.Nullable;
-import mindustry.*;
-import mindustry.mod.*;
-import mindustry.maps.*;
 import mindustry.Vars;
-import mindustry.game.Team;
 import mindustry.gen.Call;
 import mindustry.gen.Groups;
 import mindustry.gen.Player;
 import mindustry.maps.Map;
-import mindustry.maps.Maps.*;
-import mindustry.mod.Plugin;
-import mindustry.maps.Map;
 import mindustry.net.Administration;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.MessageBuilder;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -29,16 +18,9 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import nettoplugin.Autos.util;
 import nettoplugin.mindustryCommand;
 
-
-import mindustry.core.GameState.*;
-import mindustry.Vars.*;
 import org.json.JSONObject;
 
-import javax.imageio.ImageIO;
-import java.io.*;
 import java.io.File;
-import java.awt.image.BufferedImage;
-import java.lang.reflect.Array;
 
 import static mindustry.Vars.state;
 

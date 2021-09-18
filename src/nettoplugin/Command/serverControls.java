@@ -1,49 +1,24 @@
 package nettoplugin.Command;
-import net.dv8tion.*;
 import arc.Events;
 import arc.Core;
-import arc.util.*;
 import arc.util.Timer.*;
-import mindustry.*;
-import mindustry.Vars.*;
 import mindustry.gen.Call;
 import mindustry.game.Team;
 import mindustry.game.*;
-import mindustry.maps.Maps;
 import mindustry.maps.*;
-import mindustry.gen.*;
-import mindustry.io.*;
-import mindustry.net.*;
-import mindustry.type.*;
-import mindustry.core.*;
 import mindustry.core.GameState.*;
 import mindustry.game.EventType.*;
-import mindustry.net.Administration;
 import nettoplugin.mindustryCommand;
 import nettoplugin.Autos.util;
 
 //Copied From Anuken
-import mindustry.core.GameState.*;
-import mindustry.core.*;
-import mindustry.game.EventType.*;
-import mindustry.game.*;
-import mindustry.gen.*;
-import mindustry.io.*;
 import mindustry.maps.Map;
-import mindustry.maps.*;
-import mindustry.maps.Maps.*;
-import mindustry.mod.Mods.*;
-import mindustry.net.Administration.*;
-import mindustry.net.Packets.*;
-import mindustry.net.*;
-import mindustry.type.*;
 
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
-import arc.util.ColorCodes.*;
 import org.json.JSONObject;
 import static mindustry.Vars.state;
 import static mindustry.Vars.*;
