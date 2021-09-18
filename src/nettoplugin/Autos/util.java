@@ -35,12 +35,14 @@ public class util{
       if(identity <= 0){
         role = null;
       }
-      Role addiperm = event.getMember().getRoles().get(identity);
-      if(addiperm != null){
-        role = addiperm;
-      }
       else{
-        role = null;
+        Role addiperm = event.getMember().getRoles().get(identity);
+        if(addiperm != null){
+          role = addiperm;
+        }
+        else{
+          role = null;
+        }
       }
     }
 

@@ -134,33 +134,22 @@ public class serverControls extends ListenerAdapter{
         event.getChannel().sendMessage(eb.build()).queue();
         return;
       }
-      Role validity = event.getGuild().getRoleById(roleID);
-      if(validity != null){
-        int identity = event.getMember().getRoles().indexOf(validity);
-        if(identity <= 0 ){
-          EmbedBuilder nopermembed = new EmbedBuilder();
-          nopermembed.setTitle("No permission!").setDescription("ONly NETtoTOWN managers can excute this command!").setColor(0xFF3333);
-          event.getChannel().sendTyping().queue();
-          event.getChannel().sendMessage(nopermembed.build()).queue();
-          return;
-        }
-        Role addiPerm = event.getMember().getRoles().get(identity);
-        if(addiPerm != null){
-          EmbedBuilder eb = new EmbedBuilder();
-          eb.setTitle("Exit!").setDescription("The server have stopped").setColor(0xFF3333);
-          event.getChannel().sendTyping().queue();
-          event.getChannel().sendMessage(eb.build()).queue();
-          net.closeServer();
-          if(lastTask != null) lastTask.cancel();
-          state.set(State.menu);
-          return;
-        }
-        else{
-          EmbedBuilder nopermembed = new EmbedBuilder();
-          nopermembed.setTitle("No permission!").setDescription("ONly NETtoTOWN managers can excute this command!").setColor(0xFF3333);
-          event.getChannel().sendTyping().queue();
-          event.getChannel().sendMessage(nopermembed.build()).queue();
-        }
+      Role permission = util.checkUser(event);
+      if(permission != null){
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("Exit!").setDescription("The server have stopped").setColor(0xFF3333);
+        event.getChannel().sendTyping().queue();
+        event.getChannel().sendMessage(eb.build()).queue();
+        net.closeServer();
+        if(lastTask != null) lastTask.cancel();
+        state.set(State.menu);
+        return;
+      }
+      else{
+        EmbedBuilder nopermembed = new EmbedBuilder();
+        nopermembed.setTitle("No permission!").setDescription("ONly NETtoTOWN managers can excute this command!").setColor(0xFF3333);
+        event.getChannel().sendTyping().queue();
+        event.getChannel().sendMessage(nopermembed.build()).queue();
       }
       return;
     }
@@ -171,19 +160,9 @@ public class serverControls extends ListenerAdapter{
         event.getChannel().sendMessage(eb.build()).queue();
         return;
       }
-      Role validity = event.getGuild().getRoleById(roleID);
-      if(validity != null){
-        int identity = event.getMember().getRoles().indexOf(validity);
-        if(identity <= 0 ){
-          EmbedBuilder nopermembed = new EmbedBuilder();
-          nopermembed.setTitle("No permission!").setDescription("Only NETtoTOWN managers can excute this command!").setColor(0xFF3333);
-          event.getChannel().sendTyping().queue();
-          event.getChannel().sendMessage(nopermembed.build()).queue();
-          return;
-        }
-        Role addiPerm = event.getMember().getRoles().get(identity);
-        if(addiPerm != null){
-          if(lastTask != null) lastTask.cancel();
+      Role permission = util.checkUser(event);
+      if(permission != null){
+        if(lastTask != null) lastTask.cancel();
           Gamemode preset = Gamemode.survival;
           if(args.length > 1){
             try{
@@ -210,13 +189,12 @@ public class serverControls extends ListenerAdapter{
           catch(MapException e){
             return;
           }
-        }
-        else{
-          EmbedBuilder nopermembed = new EmbedBuilder();
-          nopermembed.setTitle("No permission!").setDescription("Only NETtoTOWN managers can excute this command!").setColor(0xFF3333);
-          event.getChannel().sendTyping().queue();
-          event.getChannel().sendMessage(nopermembed.build()).queue();
-        }
+      }
+      else{
+        EmbedBuilder nopermembed = new EmbedBuilder();
+        nopermembed.setTitle("No permission!").setDescription("ONly NETtoTOWN managers can excute this command!").setColor(0xFF3333);
+        event.getChannel().sendTyping().queue();
+        event.getChannel().sendMessage(nopermembed.build()).queue();
       }
       return;
     }
