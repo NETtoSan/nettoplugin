@@ -1,3 +1,5 @@
+nettoplugin/Statics/researchConduct.java
+ nettoplugin.Statics.researchConduct
 nettoplugin/Command/test.java
  nettoplugin.Command.test
 nettoplugin/mindustryCommand.java
@@ -6,5 +8,3 @@ nettoplugin/Command/serverControls.java
  nettoplugin.Command.serverControls
 nettoplugin/Autos/util.java
  nettoplugin.Autos.util
-nettoplugin/Statics/researchConduct.java
- nettoplugin.Statics.researchConduct
