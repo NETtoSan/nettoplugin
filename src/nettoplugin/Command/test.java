@@ -182,12 +182,14 @@ public class test extends ListenerAdapter {
             return;
           }
 
-          Fi mapFile = map.file;
 
           EmbedBuilder eb = new EmbedBuilder().setTitle(map.name()).setDescription(map.description()).setAuthor(map.author()).setColor(0x33FFEC);
 
           try{
-            map.image
+            new File("nettoplugin/cache/").mkdir();
+            File mapFile = new File("nettoplugin/cache/"+map.name());
+            Fi imageFile = Fi.get("nettoplugin/cache/image_"+map.name().replace(".msav",".png"));
+            
           }
           catch(Exception e){
             event.getChannel().sendTyping().queue();
