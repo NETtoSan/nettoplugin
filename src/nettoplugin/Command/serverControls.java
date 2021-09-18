@@ -97,6 +97,13 @@ public class serverControls extends ListenerAdapter{
       return;
     }
     if(args[0].equalsIgnoreCase("..gameover")){
+      if(state.isMenu()){
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("The server is down!").setDescription("The server needs to be running before you can use this command").setColor(0xFF3333);
+        event.getChannel().sendTyping().queue();
+        event.getChannel().sendMessage(eb.build()).queue();
+        return;
+      }
       //Test function in Autos
       Role permission = util.checkUser(event);
       if(permission != null){

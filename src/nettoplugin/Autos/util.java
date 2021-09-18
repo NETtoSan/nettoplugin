@@ -1,6 +1,7 @@
 package nettoplugin.Autos;
 import mindustry.maps.Map;
 import mindustry.Vars;
+import mindustry.core.GameState.*;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
