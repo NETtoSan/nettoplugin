@@ -104,7 +104,7 @@ public class test extends ListenerAdapter {
             eb.setDescription("This embed shows you all the commands where you can interact with NETtoTOWN");
             eb.setColor(0x33FFEC);
             eb.addField("Public commands","Prefix: *..*\n1. players\n2. test\n3. say\n4. help\n5. info\n6. maps\n7. map",false);
-            eb.addField("Management commands","Prefix: *..*\n1. gameover\n2. announce\n3. list\n4. host\n5. stop",false);
+            eb.addField("Management commands","Prefix: *..*\n1. gameover\n2. announce\n3. list\n4. host\n5. stop\n6. loadsave",false);
 
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(eb.build()).queue();

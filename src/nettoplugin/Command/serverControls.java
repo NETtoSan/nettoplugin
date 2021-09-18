@@ -1,10 +1,12 @@
 package nettoplugin.Command;
 import arc.Events;
 import arc.Core;
+import arc.files.Fi;
 import arc.util.Timer.*;
 import mindustry.gen.Call;
 import mindustry.game.Team;
 import mindustry.game.*;
+import mindustry.io.*;
 import mindustry.maps.*;
 import mindustry.core.GameState.*;
 import mindustry.game.EventType.*;
@@ -19,6 +21,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
+import java.io.File;
 import org.json.JSONObject;
 import static mindustry.Vars.state;
 import static mindustry.Vars.*;
@@ -207,6 +210,58 @@ public class serverControls extends ListenerAdapter{
         return;
       }
       util.checkUser(event);
+    }
+    if(args[0].equalsIgnoreCase("..loadsave")){
+      if(state.is(State.playing)){
+        EmbedBuilder eb = new EmbedBuilder().setTitle("Game is hosting").setDescription("Use `..stop` to stop hosting").setColor(0xFF3333);
+        event.getChannel().sendTyping().queue();
+        event.getChannel().sendMessage(eb.build()).queue();
+        return;
+      }
+      Role permission = util.checkUser(event);
+      if(permission != null){
+        if(args.length < 2){
+          EmbedBuilder eb = new EmbedBuilder();
+          eb.setTitle("Enter savename");
+          eb.setDescription("Usage: ..loadsave <savename>");
+          eb.setColor(0xFF3333);
+          event.getChannel().sendTyping().queue();
+          event.getChannel().sendMessage(eb.build()).queue();
+          return;
+        }
+        String[] msg = event.getMessage().getContentRaw().split(" ",2);
+        Fi file = saveDirectory.child(msg[1].trim()+".msav");
+        if(!SaveIO.isSaveValid(file)){
+          EmbedBuilder eb = new EmbedBuilder().setTitle("No valid save data found").setDescription("Try again").setColor(0xFF3333);
+          event.getChannel().sendTyping().queue();
+          event.getChannel().sendMessage(eb.build()).queue();
+          return;
+        }
+
+        Core.app.post(() -> {
+          try{
+            SaveIO.load(file);
+            state.rules.sector = null;
+            EmbedBuilder eb = new EmbedBuilder().setTitle("Host!").setDescription("Loaded save").setColor(0x33FFEC);
+            event.getChannel().sendTyping().queue();
+            event.getChannel().sendMessage(eb.build()).queue();
+            state.set(State.playing);
+            netServer.openServer();
+          }
+          catch(Throwable t){
+            EmbedBuilder eb = new EmbedBuilder().setTitle("Failed to load save").setDescription("Outdated or corrupt file").setColor(0xFF3333);
+            event.getChannel().sendTyping().queue();
+            event.getChannel().sendMessage(eb.build()).queue();
+          }
+        });
+      }
+      else{
+        EmbedBuilder nopermembed = new EmbedBuilder();
+        nopermembed.setTitle("No permission!").setDescription("ONly NETtoTOWN managers can excute this command!").setColor(0xFF3333);
+        event.getChannel().sendTyping().queue();
+        event.getChannel().sendMessage(nopermembed.build()).queue();
+      }
+      return;
     }
   }
 }
