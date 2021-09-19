@@ -140,7 +140,7 @@ public class serverControls extends ListenerAdapter{
       Role permission = util.checkUser(event);
       if(permission != null){
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle("Exit!").setDescription("The server have stopped").setColor(0xFF3333);
+        eb.setTitle("Stopped hosting!").setDescription("The server have stopped").setColor(0xFF3333);
         event.getChannel().sendTyping().queue();
         event.getChannel().sendMessage(eb.build()).queue();
         net.closeServer();
@@ -158,7 +158,7 @@ public class serverControls extends ListenerAdapter{
     }
     if(args[0].equalsIgnoreCase("..host")){
       if(state.is(State.playing)){
-        EmbedBuilder eb = new EmbedBuilder().setTitle("Game is hosting").setDescription("Use `..stop` to stop hosting").setColor(0xFF3333);
+        EmbedBuilder eb = new EmbedBuilder().setTitle("Game is hosting!").setDescription("Use `..stop` to stop hosting").setColor(0xFF3333);
         event.getChannel().sendTyping().queue();
         event.getChannel().sendMessage(eb.build()).queue();
         return;

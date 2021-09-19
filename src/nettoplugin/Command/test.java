@@ -69,11 +69,6 @@ public class test extends ListenerAdapter {
             event.getChannel().sendMessage(eb.build()).queue();
             return;
         }
-        if(args[0].equalsIgnoreCase("..test")){
-            event.getChannel().sendTyping().queue();
-            event.getChannel().sendMessage(event.getMember().getRoles().toString()).queue();
-            return;
-        }
         if(args[0].equalsIgnoreCase("..say")){
             if(state.isMenu()){
               EmbedBuilder eb = new EmbedBuilder();
