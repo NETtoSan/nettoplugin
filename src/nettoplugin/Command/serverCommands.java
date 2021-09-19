@@ -24,7 +24,7 @@ import java.io.File;
 
 import static mindustry.Vars.state;
 
-public class test extends ListenerAdapter {
+public class serverCommands extends ListenerAdapter {
     private @Nullable Map nextMapOverride;
     private JSONObject dOb = mindustryCommand.alldata.getJSONObject("discord");;
     public Role crap;
@@ -63,7 +63,6 @@ public class test extends ListenerAdapter {
             eb.setColor(0x33FFEC);
             eb.setDescription("Currnet players joined NETtoTOWN");
             eb.addField("Players total", lijst.toString(),false);
-            eb.addField("Administrators",admins.toString(),false);
 
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(eb.build()).queue();

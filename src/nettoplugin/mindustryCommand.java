@@ -5,6 +5,7 @@ import mindustry.content.Blocks;
 import mindustry.core.GameState;
 import mindustry.game.EventType;
 import net.dv8tion.*;
+import nettoplugin.Command.*;
 import arc.Core;
 import mindustry.mod.Plugin;
 import mindustry.net.Administration.PlayerAction;
@@ -20,8 +21,9 @@ import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
 import org.javacord.api.DiscordApi;
-import nettoplugin.Command.test;
+import nettoplugin.Command.serverCommands;
 import nettoplugin.Command.serverControls;
+import nettoplugin.Command.discordCommands;
 import org.javacord.api.DiscordApiBuilder;
 import org.javacord.api.entity.channel.Channel;
 import org.javacord.api.entity.channel.TextChannel;
@@ -74,8 +76,9 @@ public class mindustryCommand extends Plugin{
             jda = JDABuilder.createDefault(alldata.getString("token")).build();
             jda.getPresence().setStatus(OnlineStatus.ONLINE);
             jda.getPresence().setActivity(Activity.listening("NETto's pain"));
-            jda.addEventListener(new test());
+            jda.addEventListener(new serverCommands());
             jda.addEventListener(new serverControls());
+            jda.addEventListener(new discordCommands());
         }
         catch(Exception e){
             if(e.getMessage().contains("READY Packet")){
