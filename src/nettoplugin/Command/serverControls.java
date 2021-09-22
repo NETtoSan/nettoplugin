@@ -213,7 +213,7 @@ public class serverControls extends ListenerAdapter{
     }
     if(args[0].equalsIgnoreCase("..loadsave")){
       if(state.is(State.playing)){
-        EmbedBuilder eb = new EmbedBuilder().setTitle("Game is hosting").setDescription("Use `..stop` to stop hosting").setColor(0xFF3333);
+        EmbedBuilder eb = new EmbedBuilder().setTitle("Game is hosting!").setDescription("Use `..stop` to stop hosting").setColor(0xFF3333);
         event.getChannel().sendTyping().queue();
         event.getChannel().sendMessage(eb.build()).queue();
         return;
@@ -232,7 +232,7 @@ public class serverControls extends ListenerAdapter{
         String[] msg = event.getMessage().getContentRaw().split(" ",2);
         Fi file = saveDirectory.child(msg[1].trim()+".msav");
         if(!SaveIO.isSaveValid(file)){
-          EmbedBuilder eb = new EmbedBuilder().setTitle("No valid save data found").setDescription("Try again").setColor(0xFF3333);
+          EmbedBuilder eb = new EmbedBuilder().setTitle("No valid save data found!").setDescription("Try again").setColor(0xFF3333);
           event.getChannel().sendTyping().queue();
           event.getChannel().sendMessage(eb.build()).queue();
           return;
@@ -242,7 +242,7 @@ public class serverControls extends ListenerAdapter{
           try{
             SaveIO.load(file);
             state.rules.sector = null;
-            EmbedBuilder eb = new EmbedBuilder().setTitle("Host!").setDescription("Loaded save").setColor(0x33FFEC);
+            EmbedBuilder eb = new EmbedBuilder().setTitle("Host!").setDescription("Loaded save `@`".replace("@",msg[1].trim())).setColor(0x33FFEC);
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(eb.build()).queue();
             state.set(State.playing);
