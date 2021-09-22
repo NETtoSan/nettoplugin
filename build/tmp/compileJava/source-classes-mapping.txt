@@ -1,10 +1,12 @@
-nettoplugin/Command/test.java
- nettoplugin.Command.test
-nettoplugin/mindustryCommand.java
- nettoplugin.mindustryCommand
-nettoplugin/Command/serverControls.java
- nettoplugin.Command.serverControls
+nettoplugin/Command/discordCommands.java
+ nettoplugin.Command.discordCommands
+nettoplugin/Command/serverCommands.java
+ nettoplugin.Command.serverCommands
 nettoplugin/Autos/util.java
  nettoplugin.Autos.util
 nettoplugin/Statics/researchConduct.java
  nettoplugin.Statics.researchConduct
+nettoplugin/mindustryCommand.java
+ nettoplugin.mindustryCommand
+nettoplugin/Command/serverControls.java
+ nettoplugin.Command.serverControls
