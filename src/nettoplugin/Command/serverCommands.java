@@ -94,11 +94,11 @@ public class serverCommands extends ListenerAdapter {
         }
         if(args[0].equalsIgnoreCase("..help")){
             EmbedBuilder eb = new EmbedBuilder();
-            eb.setTitle("Help embed");
-            eb.setDescription("This embed shows you all the commands where you can interact with NETtoTOWN");
-            eb.setColor(0x33FFEC);
+            eb.setTitle("Help");
+            eb.setDescription("List of commands where you can intereact with this mindustry server");
             eb.addField("Public commands","Prefix: *..*\n1. players\n2. test\n3. say\n4. help\n5. info\n6. maps\n7. map",false);
             eb.addField("Management commands","Prefix: *..*\n1. gameover\n2. announce\n3. list\n4. host\n5. stop\n6. loadsave",false);
+            eb.setColor(0x33FFEC);
 
             event.getChannel().sendTyping().queue();
             event.getChannel().sendMessage(eb.build()).queue();
@@ -118,8 +118,8 @@ public class serverCommands extends ListenerAdapter {
                 eb.setDescription("NETtoTOWN status");
                 eb.addField("Current map",state.map.name(),false);
                 eb.addField("Performance",Core.graphics.getFramesPerSecond()+"FPS / "+ Core.app.getJavaHeap()/1024/1024+" Megabytes",false);
-                eb.setColor(0x33FFEC);
                 eb.addField("Players",""+Groups.player.size(), false);
+                eb.setColor(0x33FFEC);
 
                 event.getChannel().sendTyping().queue();
                 event.getChannel().sendMessage(eb.build()).queue();
@@ -160,7 +160,7 @@ public class serverCommands extends ListenerAdapter {
 
 
           EmbedBuilder eb = new EmbedBuilder().setTitle(map.name()).setDescription(map.description()).setAuthor(map.author()).setColor(0x33FFEC);
-
+          //Someone pls help me fix this code :'(
           try{
             new File("nettoplugin/cache/").mkdir();
             File mapFile = new File("nettoplugin/cache/"+map.name());
