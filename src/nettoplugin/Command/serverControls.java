@@ -35,6 +35,7 @@ public class serverControls extends ListenerAdapter{
   public Role crap;
   public void onGuildMessageReceived(GuildMessageReceivedEvent event){
     String[] args = event.getMessage().getContentRaw().split(" ");
+    Role permission = util.checkUser(event);
     if(args[0].equalsIgnoreCase("..announce")){
       if(state.isMenu()){
         EmbedBuilder eb = new EmbedBuilder();
@@ -108,11 +109,10 @@ public class serverControls extends ListenerAdapter{
         return;
       }
       //Test function in Autos
-      Role permission = util.checkUser(event);
       if(permission != null){
         try{
           event.getChannel().sendTyping().queue();
-          event.getChannel().sendMessage("Executed!").queue();
+          event.getChannel().sendMessage(new EmbedBuilder().setTitle("Triggered gameover event!").setColor(0x33FFEC).build()).queue();
           Events.fire(new GameOverEvent(Team.crux));
 
         }
@@ -137,7 +137,6 @@ public class serverControls extends ListenerAdapter{
         event.getChannel().sendMessage(eb.build()).queue();
         return;
       }
-      Role permission = util.checkUser(event);
       if(permission != null){
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("Stopped hosting!").setDescription("The server have stopped").setColor(0xFF3333);
@@ -163,7 +162,6 @@ public class serverControls extends ListenerAdapter{
         event.getChannel().sendMessage(eb.build()).queue();
         return;
       }
-      Role permission = util.checkUser(event);
       if(permission != null){
         if(lastTask != null) lastTask.cancel();
           Gamemode preset = Gamemode.survival;
@@ -219,7 +217,6 @@ public class serverControls extends ListenerAdapter{
         event.getChannel().sendMessage(eb.build()).queue();
         return;
       }
-      Role permission = util.checkUser(event);
       if(permission != null){
 
       }
@@ -238,7 +235,6 @@ public class serverControls extends ListenerAdapter{
         event.getChannel().sendMessage(eb.build()).queue();
         return;
       }
-      Role permission = util.checkUser(event);
       if(permission != null){
         if(args.length < 2){
           EmbedBuilder eb = new EmbedBuilder();
