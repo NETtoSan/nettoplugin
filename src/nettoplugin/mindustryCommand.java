@@ -96,10 +96,10 @@ public class mindustryCommand extends Plugin{
                 }
             });
             Events.on(PlayerJoin.class,event->{
-              jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Join event").setDescription(event.player.name+" Joined the server").build()).queue();
+              jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Player joined").setDescription(event.player.name+" Joined the server").build()).queue();
             });
             Events.on(PlayerLeave.class,event->{
-              jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Join event").setDescription(event.player.name+" left the server").build()).queue();
+              jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Player left").setDescription(event.player.name+" left the server").build()).queue();
             });
             Events.on(EventType.PlayerChatEvent.class, event -> {
               jda.getTextChannelById("740998890312171560").sendTyping().queue();
@@ -107,9 +107,13 @@ public class mindustryCommand extends Plugin{
             });
             Events.on(ServerLoadEvent.class,event -> {
               jda.getTextChannelById("740998890312171560").sendTyping().queue();
-              jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Server loaded!").setDescription("It will be hosted shortly").setColor(0x33FFEC).build()).queue();
+              jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Server loaded!").setColor(0x33FFEC).build()).queue();
               jda.getPresence().setActivity(Activity.listening("Server rumbling itself to death"));
 
+            });
+            Events.on(EventType.GameOverEvent.class , event -> {
+                jda.getTextChannelById("740998890312171560").sendTyping().queue();
+                jda.getTextChannelById("740998890312171560").sendMessage(new net.dv8tion.jda.api.EmbedBuilder().setTitle("Game over!").setDescription("Game ended with @ waves").setColor(0x33FFEC).build()).queue();
             });
         }
     }
