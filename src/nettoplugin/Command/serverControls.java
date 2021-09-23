@@ -211,6 +211,26 @@ public class serverControls extends ListenerAdapter{
       }
       util.checkUser(event);
     }
+    if(args[0].equalsIgnoreCase("..admin")){
+      if(state.isMenu()){
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("The server is down!").setDescription("The server needs to be running before you can use this command").setColor(0xFF3333);
+        event.getChannel().sendTyping().queue();
+        event.getChannel().sendMessage(eb.build()).queue();
+        return;
+      }
+      Role permission = util.checkUser(event);
+      if(permission != null){
+
+      }
+      else{
+        EmbedBuilder nopermembed = new EmbedBuilder();
+        nopermembed.setTitle("No permission!").setDescription("ONly NETtoTOWN managers can excute this command!").setColor(0xFF3333);
+        event.getChannel().sendTyping().queue();
+        event.getChannel().sendMessage(nopermembed.build()).queue();
+      }
+      return;
+    }
     if(args[0].equalsIgnoreCase("..loadsave")){
       if(state.is(State.playing)){
         EmbedBuilder eb = new EmbedBuilder().setTitle("Game is hosting!").setDescription("Use `..stop` to stop hosting").setColor(0xFF3333);
