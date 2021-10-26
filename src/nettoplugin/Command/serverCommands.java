@@ -96,7 +96,7 @@ public class serverCommands extends ListenerAdapter {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setTitle("Help");
             eb.setDescription("List of commands where you can intereact with this mindustry server");
-            eb.addField("Public commands","Prefix: *..*\n1. players\n2. test\n3. say\n4. help\n5. info\n6. maps\n7. map",false);
+            eb.addField("Public commands","Prefix: *..*\n1. players\n2. test\n3. say\n4. help\n5. info\n6. maps\n7. map\n8. succ",false);
             eb.addField("Management commands","Prefix: *..*\n1. gameover\n2. announce\n3. list\n4. host\n5. stop\n6. loadsave",false);
             eb.setColor(0x33FFEC);
 
@@ -165,7 +165,7 @@ public class serverCommands extends ListenerAdapter {
             new File("nettoplugin/cache/").mkdir();
             File mapFile = new File("nettoplugin/cache/"+map.name());
             Fi imageFile = Fi.get("nettoplugin/cache/image_"+map.name().replace(".msav",".png"));
-            
+
           }
           catch(Exception e){
             event.getChannel().sendTyping().queue();
