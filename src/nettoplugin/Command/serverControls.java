@@ -279,5 +279,64 @@ public class serverControls extends ListenerAdapter{
       }
       return;
     }
+    if(args[0].equalsIgnoreCase("..admin")){
+      if(state.is(State.playing)){
+        EmbedBuilder eb = new EmbedBuilder().setTitle("Game is hosting").setDescription("Use `..stop` to stop hosting").setColor(0xFF3333);
+        event.getChannel().sendTyping().queue();
+        event.getChannel().sendMessage(eb.build()).queue();
+        return;
+      }
+      Role validity = event.getGuild().getRoleById(roleID);
+      if(validity != null){
+        int identity = event.getMember().getRoles().indexOf(validity);
+        if(identity <= 0 ){
+          EmbedBuilder nopermembed = new EmbedBuilder();
+          nopermembed.setTitle("No permission!").setDescription("Only NETtoTOWN managers can excute this command!").setColor(0xFF3333);
+          event.getChannel().sendTyping().queue();
+          event.getChannel().sendMessage(nopermembed.build()).queue();
+          return;
+        }
+        Role addiPerm = event.getMember().getRoles().get(identity);
+        if(addiPerm != null){
+          if(args.length < 2){
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setTitle("Message required").setDescription("Usage: ..announce <context>").setColor(0xFF3333);
+            event.getChannel().sendTyping().queue();
+            event.getChannel().sendMessage(eb.build()).queue();
+            return;
+          }
+          String[] target = event.getMessage().getContentRaw().split(" ",2);
+          PlayerInfo ptarget;
+          Player player = Groups.player.find(p -> p.name.equalsIgnoreCase(target));
+          if(player != null){
+            ptarget = player.getInfo();
+          }
+          else{
+            ptarget = netServer.admins.getInfoOptional(target);
+            player = Groups.player.find(p -> p.getInfo() == ptarget);
+          }
+
+          boolean playerIsAdmin = player.admin;
+          if(ptarget != null){
+            if(playerIsAdmin){
+              netServer.admins.adminPlayer(ptarget.id, ptarget.adminUsid);
+              EmbedBuilder eb = new EmbedBuilder();
+              eb.setTitle("Success").setDescription("Add @ as admin".reaplce("@",ptarget.lastName)).setColor(0x33FFEC);
+              event.getChannel().sendTyping().queue();
+              event.getChannel().sendMessage(eb.build()).queue();
+              return;
+            }
+          }
+
+        }
+        else{
+          EmbedBuilder nopermembed = new EmbedBuilder();
+          nopermembed.setTitle("No permission!").setDescription("Only NETtoTOWN managers can excute this command!").setColor(0xFF3333);
+          event.getChannel().sendTyping().queue();
+          event.getChannel().sendMessage(nopermembed.build()).queue();
+        }
+      }
+      return;
+    }
   }
 }
