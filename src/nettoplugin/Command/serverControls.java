@@ -5,6 +5,8 @@ import arc.files.Fi;
 import arc.util.Timer.*;
 import mindustry.gen.Call;
 import mindustry.game.Team;
+import mindustry.net.Administration.*;
+import mindustry.net.Administration.PlayerInfo;
 import mindustry.game.*;
 import mindustry.io.*;
 import mindustry.maps.*;
@@ -299,35 +301,12 @@ public class serverControls extends ListenerAdapter{
         Role addiPerm = event.getMember().getRoles().get(identity);
         if(addiPerm != null){
           if(args.length < 2){
-            EmbedBuilder eb = new EmbedBuilder();
-            eb.setTitle("Message required").setDescription("Usage: ..announce <context>").setColor(0xFF3333);
-            event.getChannel().sendTyping().queue();
-            event.getChannel().sendMessage(eb.build()).queue();
             return;
           }
-          String[] target = event.getMessage().getContentRaw().split(" ",2);
-          PlayerInfo ptarget;
-          Player player = Groups.player.find(p -> p.name.equalsIgnoreCase(target));
-          if(player != null){
-            ptarget = player.getInfo();
-          }
-          else{
-            ptarget = netServer.admins.getInfoOptional(target);
-            player = Groups.player.find(p -> p.getInfo() == ptarget);
-          }
+          String[] playertarget = event.getMessage().getContentRaw().split(" ",2);
 
-          boolean playerIsAdmin = player.admin;
-          if(ptarget != null){
-            if(playerIsAdmin){
-              netServer.admins.adminPlayer(ptarget.id, ptarget.adminUsid);
-              EmbedBuilder eb = new EmbedBuilder();
-              eb.setTitle("Success").setDescription("Add @ as admin".reaplce("@",ptarget.lastName)).setColor(0x33FFEC);
-              event.getChannel().sendTyping().queue();
-              event.getChannel().sendMessage(eb.build()).queue();
-              return;
-            }
-          }
-
+          PlayerInfo target;
+          Player playert = Groups.player.find(p -> p.name.equalsIgnoreCase(playertarget));
         }
         else{
           EmbedBuilder nopermembed = new EmbedBuilder();
